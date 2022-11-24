@@ -1,15 +1,18 @@
 name: ff_bloc
-description: A new Flutter package project.
-version: 0.0.1
+description: FF bloc for creating awesome apps easy
+version: 1.0.0
 homepage:
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: '>=2.18.4'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: 
+  equatable: ^2.0.0
+  get_it: ^7.0.0
 
 dev_dependencies:
   flutter_test:

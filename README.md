@@ -1,39 +1,60 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+FF bloc for creating awesome apps easy
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+# Why
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+- Event applyAsync - easy to extend and very fast for navigation by codebase.
+- File structure like features is more useful for code generation and quick navigation when you write code.
+- Work with all base state. Simple to understand and for use.
+- Base abstraction for subscribe and dispose.
+- Dispose by getit
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# boilerplate
 
-## Features
+Use [[FF] Flutter Files](https://marketplace.visualstudio.com/items?itemName=gornivv.vscode-flutter-files) for code generation.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+# Advanced
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Example with override logger logic:
 
 ```dart
-const like = 'sample';
+
+abstract class CustomBloc<Event extends CustomBlocEvent<State, Bloc<Event, State>>, State extends CustomState> extends FFBloc<Event, State> {
+  CustomBloc({
+    required super.initialState,
+    required this.logger,
+  });
+
+  @nonVirtual
+  final Logger logger;
+
+  @override
+  void onObserver({required Event event}) {
+    logger.i('on event: ${event.toString()}', tag: runtimeType.toString());
+  }
+
+  @override
+  void onErrorObserver({required Event event, required Object error, required StackTrace stackTrace}) {
+    logger.e(
+      error.toString(),
+      exception: error,
+      tag: event.runtimeType.toString(),
+      stackTrace: stackTrace,
+    );
+  }
+
+  @override
+  void onTransitionObserver({required Transition<Event, State> transition}) {
+    logger.i('onTransition: ${transition.toString()}', tag: runtimeType.toString());
+  }
+}
+
+
+@immutable
+abstract class CustomState<Self, DataT> extends FFState<Self, DataT> {
+  const CustomState({
+    required super.version,
+    required super.isLoading,
+    required super.data,
+    required super.error,
+});
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
