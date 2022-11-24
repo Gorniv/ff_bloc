@@ -1,5 +1,13 @@
 FF bloc for creating awesome apps easy
 
+[![Pub](https://img.shields.io/pub/v/ff_bloc.svg)](https://pub.dev/packages/ff_bloc)
+
+## Import
+
+```yaml
+ff_bloc: 1.0.0
+```
+
 # Why
 
 - Event applyAsync - easy to extend and very fast for navigation by codebase.
