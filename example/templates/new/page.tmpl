@@ -25,6 +25,12 @@ class _${upperName}PageState extends State<${upperName}Page> {
         title: const Text('${upperName}'),
          actions: [
           IconButton(
+            icon: const Icon(Icons.error),
+            onPressed: () {
+              widget.bloc.add(ErrorYouAwesomeEvent());
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
               widget.bloc.add(Add${upperName}Event());

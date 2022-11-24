@@ -25,6 +25,12 @@ class _YouAwesomePageState extends State<YouAwesomePage> {
         title: const Text('YouAwesome'),
          actions: [
           IconButton(
+            icon: const Icon(Icons.error),
+            onPressed: () {
+              widget.bloc.add(ErrorYouAwesomeEvent());
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
               widget.bloc.add(AddYouAwesomeEvent());

@@ -46,6 +46,18 @@ class Add${upperName}Event extends ${upperName}Event {
   }
 }
 
+class ErrorYouAwesomeEvent extends YouAwesomeEvent {
+  static const String _name = 'ErrorYouAwesomeEvent';
+
+  @override
+  String toString() => _name;
+
+  @override
+  Stream<YouAwesomeState> applyAsync({required YouAwesomeBloc bloc}) async* {
+    throw Exception('Test error');
+  }
+}
+
 class Clear${upperName}Event extends ${upperName}Event {
   static const String _name = 'Clear${upperName}Event';
 

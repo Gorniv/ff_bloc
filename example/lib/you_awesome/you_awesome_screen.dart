@@ -45,7 +45,17 @@ class YouAwesomeScreenState extends State<YouAwesomeScreen> {
           onLoading: ()=>const CircularProgressIndicator(),
           onEmpty: (data) =>  _Empty(),
           onData: (data) =>  _BodyList(data: data),
-          onError: (e) => Text(e.toString()),
+          onError: (e) =>  Center(
+            child: Column(
+              children: [
+                Text(e.toString()),
+                TextButton(
+                  onPressed: _load,
+                  child: const Text('ReLoad'),
+                )
+              ],
+            ),
+          ),
         );
       },
     );
