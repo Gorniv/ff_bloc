@@ -47,6 +47,9 @@ abstract class FFBloc<Event extends FFBlocEvent<State, Bloc<Event, State>>,
           event.applyAsync(bloc: this),
           onData: (state) => state,
           onError: (error, stackTrace) {
+            // ignore: invalid_use_of_protected_member
+            Bloc.observer.onError(this, error, stackTrace);
+
             onErrorObserver(error: error, event: event, stackTrace: stackTrace);
             return onErrorState(error);
           },
