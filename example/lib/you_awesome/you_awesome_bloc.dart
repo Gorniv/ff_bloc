@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:ff_bloc/ff_bloc.dart';
 
 import 'package:example/you_awesome/index.dart';
 
 class YouAwesomeBloc extends FFBloc<YouAwesomeEvent, YouAwesomeState> {
-  YouAwesomeBloc({    
+  YouAwesomeBloc({
     required this.provider,
     super.initialState = const YouAwesomeState(),
   });
@@ -11,6 +13,13 @@ class YouAwesomeBloc extends FFBloc<YouAwesomeEvent, YouAwesomeState> {
   final YouAwesomeProvider provider;
 
   @override
-  YouAwesomeState onErrorState(Object error) => state.copy(error: error, isLoading: false);
+  Iterable<StreamSubscription>? initSubscriptions() {
+    return <StreamSubscription>[
+      // listen here
+    ];
+  }
 
+  @override
+  YouAwesomeState onErrorState(Object error) =>
+      state.copy(error: error, isLoading: false);
 }

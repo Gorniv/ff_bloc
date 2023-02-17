@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 abstract class FFBloc<Event extends FFBlocEvent<State, Bloc<Event, State>>,
     State extends FFState> extends Bloc<Event, State> implements Disposable {
@@ -71,7 +72,36 @@ abstract class FFBloc<Event extends FFBlocEvent<State, Bloc<Event, State>>,
   @protected
   Stream<Event> transform(
       Stream<Event> events, Stream<Event> Function(Event) mapper) {
-    return events.asyncExpand(mapper);
+    /// Process events concurrently.
+    ///
+    /// **Note**: there may be event handler overlap and state changes will occur
+    /// as soon as they are emitted. This means that states may be emitted in
+    /// an order that does not match the order in which the corresponding events
+    /// were added.
+    // return concurrent<Event>().call(events, mapper);
+
+    /// Process only one event and ignore (drop) any new events
+    /// until the current event is done.
+    ///
+    /// **Note**: dropped events never trigger the event handler.
+    // return droppable<Event>().call(events, mapper);
+
+    /// Process only one event by cancelling any pending events and
+    /// processing the new event immediately.
+    ///
+    /// Avoid using [restartable] if you expect an event to have
+    /// immediate results -- it should only be used with asynchronous APIs.
+    ///
+    /// **Note**: there is no event handler overlap and any currently running tasks
+    /// will be aborted if a new event is added before a prior one completes.
+    // return restartable<Event>().call(events, mapper);
+
+    /// Process events one at a time by maintaining a queue of added events
+    /// and processing the events sequentially.
+    ///
+    /// **Note**: there is no event handler overlap and every event is guaranteed
+    /// to be handled in the order it was received.
+    return sequential<Event>().call(events, mapper);
   }
 
   @override
