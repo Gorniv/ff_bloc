@@ -5,7 +5,7 @@ FF bloc for creating awesome apps easy
 ## Import
 
 ```yaml
-ff_bloc: 1.0.3
+ff_bloc: 1.0.4
 ```
 
 # Why
