@@ -1,13 +1,12 @@
+import 'package:example/you_awesome/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:example/you_awesome/index.dart';
-
 
 class YouAwesomeScreen extends StatefulWidget {
   const YouAwesomeScreen({
     required this.bloc,
     super.key,
-  }) ;
+  });
 
   @protected
   final YouAwesomeBloc bloc;
@@ -19,7 +18,6 @@ class YouAwesomeScreen extends StatefulWidget {
 }
 
 class YouAwesomeScreenState extends State<YouAwesomeScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -42,10 +40,10 @@ class YouAwesomeScreenState extends State<YouAwesomeScreen> {
         YouAwesomeState currentState,
       ) {
         return currentState.when(
-          onLoading: ()=>const CircularProgressIndicator(),
-          onEmpty: (data) =>  _Empty(),
-          onData: (data) =>  _BodyList(data: data),
-          onError: (e) =>  Center(
+          onLoading: () => const CircularProgressIndicator(),
+          onEmpty: (data) => _Empty(),
+          onData: (data) => _BodyList(data: data),
+          onError: (e) => Center(
             child: Column(
               children: [
                 Text(e.toString()),
@@ -62,11 +60,9 @@ class YouAwesomeScreenState extends State<YouAwesomeScreen> {
   }
 
   void _load() {
-    widget.bloc.add(LoadYouAwesomeEvent(id:'1'));
+    widget.bloc.add(LoadYouAwesomeEvent(id: '1'));
   }
-
 }
-
 
 class _BodyList extends StatefulWidget {
   const _BodyList({required this.data});
@@ -78,7 +74,6 @@ class _BodyList extends StatefulWidget {
 }
 
 class _BodyListState extends State<_BodyList> {
-
   @override
   void initState() {
     super.initState();
@@ -91,30 +86,29 @@ class _BodyListState extends State<_BodyList> {
 
   @override
   Widget build(BuildContext context) {
-
     return CustomScrollView(
         // primary: true,
         slivers: [
           const SliverToBoxAdapter(child: Divider()),
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-          final item = widget.data.items![index];
-          if (index == 0) {
-            return Text('Header $index, id = '+item.name);
-          }
-          return Text('Index = $index, id = '+item.name);
-        },
-        childCount: widget.data.items!.length,
-    ))]);
+              delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              final item = widget.data.items![index];
+              if (index == 0) {
+                return Text('Header $index, id = ${item.name}');
+              }
+              return Text('Index = $index, id = ${item.name}');
+            },
+            childCount: widget.data.items!.length,
+          ))
+        ]);
   }
 }
-
 
 class _Empty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: <Widget>[
         Text('Empty'),
       ],

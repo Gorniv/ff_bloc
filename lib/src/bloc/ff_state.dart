@@ -41,7 +41,7 @@ abstract class FFState<Self, DataT> extends Equatable {
   @nonVirtual
   final DataT? data;
   @nonVirtual
-  final dynamic? error;
+  final dynamic error;
 
   @nonVirtual
   FFStateStatus get status {

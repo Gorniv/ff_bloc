@@ -1,22 +1,22 @@
 name: ff_bloc
 description: FF bloc for creating awesome apps easy
-version: 1.0.3
+version: 1.0.4
 repository: https://github.com/Gorniv/ff_bloc
 
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=2.18.4'
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: 
-  equatable: ^2.0.0
-  get_it: ^7.0.0
+  equatable: 
+  get_it: 
   bloc_concurrency: 
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: 
